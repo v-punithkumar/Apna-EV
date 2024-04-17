@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ 'ocm.general.about' | translate }} Apna EV</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2">
+        <img src="assets/images/icons/branding/AppIcon_128x128.png">
+      </ion-col>
+      <ion-col>
+        <h1>Apna EV</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-note>
+    <p>App Version: {{appVersion}}</p>
+
+  </ion-note>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close" slot="start"></ion-icon>
+        Close
+
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>

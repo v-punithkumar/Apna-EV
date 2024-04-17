@@ -1,0 +1,21 @@
+.banner {
+  background-color: #4f712f;
+  color: rgba(255, 255, 255, 0.925);
+  padding: 1em 3em 1em 6em;
+  text-shadow: #000 1px 1px 1px;
+  min-height: 180px;
+  background-size: cover;
+  h2 {
+    margin: 0;
+  }
+}
+
+.banner-content {
+  padding-right: 48px;
+}
+
+
+p {
+  display: block;
+  padding: 4px;
+}

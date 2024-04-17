@@ -1,0 +1,14 @@
+
+.address-details ion-card img {
+  max-height: 200px;
+  width: auto;
+}
+
+ion-label {
+  overflow: inherit;
+  /*  white-space: pre-line;*/
+}
+
+ion-title > small {
+  color: var(--ion-color-favorite)
+}
