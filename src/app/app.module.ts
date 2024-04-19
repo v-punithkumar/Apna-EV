@@ -25,6 +25,9 @@ import { AboutPageModule } from './pages/about/about.module';
 import { LayerEditorPageModule } from './pages/layer-editor/layer-editor.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AdminPanelComponent } from './admin/admin-panel.component';
+import { LocationRequestService } from './services/location-request.service';
+
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -56,7 +59,8 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AdminPanelComponent], 
+  
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -90,7 +94,8 @@ const firebaseConfig = {
     AngularFirestoreModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LocationRequestService,
   ],
   bootstrap: [AppComponent]
 })

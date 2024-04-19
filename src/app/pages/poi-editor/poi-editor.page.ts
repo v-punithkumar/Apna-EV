@@ -489,7 +489,7 @@ export class PoiEditorPage implements OnInit {
 
     await this.presentLoadingUI();
     try {
-      await this.appManager.submitPOI(this.item);
+      await this.appManager.addPOIToLiveInstance(this.item);
 
       await this.dismissLoadingUI();
 

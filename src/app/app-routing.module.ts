@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'signin', loadChildren: () => import('./pages/signin/signin.module').then(m => m.SignInModule) },
   { path: 'poi-editor/:id', loadChildren: () => import('./pages/poi-editor/poi-editor.module').then(m => m.PoiEditorPageModule) },
   { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule) },
+  { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule) },
   { path: 'layer-editor', loadChildren: () => import('./pages/layer-editor/layer-editor.module').then(m => m.LayerEditorPageModule) }
 
 ];

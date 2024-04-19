@@ -18,11 +18,13 @@ import { Platforms } from '@ionic/core';
 import { Analytics } from './Analytics';
 import { environment } from '../../environments/environment';
 import { Events } from './Events';
+import { POIDetails } from '../model/CoreDataModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppManager {
+  private apiUrl = 'http://localhost:5000/api/pois';
 
   enableSubmissionQueue: boolean;
 
@@ -228,6 +230,21 @@ export class AppManager {
       }
     }
   }
+  public addPOIToLiveInstance(poi: POIDetails): Promise<any> {
+    // Make an API call to the Python server to store the POI in the database
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(this.apiUrl, poi).subscribe(
+        (response) => {
+          console.log('POI added to the live instance:', response);
+          resolve(response);
+        },
+        (error) => {
+          console.error('Error adding POI to the live instance:', error);
+          reject(error);
+        }
+      );
+    }
+  )}
 
   public initAuthFromStorage() {
     // check if valid user auth already in local storage

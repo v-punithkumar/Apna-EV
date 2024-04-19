@@ -10,6 +10,7 @@ mongo = PyMongo(app)
 CORS(app)  # This will allow all origins
 # or
 # CORS(app, resources={r"/api/*": {"origins": "http://localhost:8100"}})  # For a specific origin
+# lo
 
 @app.route('/api/pois', methods=['POST'])
 def store_poi():

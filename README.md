@@ -10,3 +10,18 @@
 
 Run `ionic build --prod` which will output html build to www folder. When updating live app, preserve web.config and favicon.
 Copy `www` output to gh-pages branch and commit to publish. When updating live app, preserve CNAME and favicon.
+
+
+
+Python Side Implementation 
+
+1. python3 -m venv myenv
+2. source .\myenv\Scripts\activate
+3. pip install flask
+4. pip install flask_pymongo
+5. pip install flask_cors
+
+After this run 
+
+python .\live.py
+
