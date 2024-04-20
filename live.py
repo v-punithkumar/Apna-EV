@@ -38,6 +38,14 @@ def store_poi():
     result = pois.insert_one(new_poi)
 
     return jsonify({'message': 'POI stored successfully', 'id': str(result.inserted_id)})
+#adding the fetching api
+@app.route('/api/pois', methods=['GET'])
+def get_pois():
+    pois = mongo.db.pois.find()
+    poi_list = []
+    for poi in pois:
+        poi_list.append(poi)
+    return jsonify(poi_list)
 
 if __name__ == '__main__':
     app.run(debug=True)

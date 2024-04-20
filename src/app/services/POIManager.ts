@@ -1,12 +1,10 @@
 
 import { Logging, LogLevel } from './Logging';
 import { Events } from './Events';
-
-/**
-* @author Christopher Cook
-* @copyright Webprofusion Pty Ltd https://webprofusion.com
-*/
 import { Injectable, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { POISearchParams } from '../model/AppModels';
 import { APIClient } from './APIClient';
 import { Analytics } from './Analytics';
@@ -20,9 +18,13 @@ export class POIManager {
   poiList: any[];
   isRequestInProgress: boolean = false;
 
-  constructor(public api: APIClient, public events: Events, public logging: Logging, public analytics: Analytics) {
-
-  }
+  constructor(
+    public api: APIClient,
+    public events: Events,
+    public logging: Logging,
+    public analytics: Analytics,
+    private http: HttpClient // Inject HttpClient
+  ) {}
 
   /**
    * Perform query and set poiList property to list of results
@@ -43,23 +45,41 @@ export class POIManager {
       return 0;
     }
   }
-
+//here the fetching of both apis takes place
   public async fetchPOIList(searchParams: POISearchParams): Promise<Array<ExtendedPOIDetails>> {
-
     this.isRequestInProgress = true;
 
     try {
-
+      // Fetch POIs from the main API
       let results = await this.api.fetchPOIListByParam(searchParams);
+      
+      // Fetch additional POIs from the localhost API
+      const localResults = await this.fetchLocalPOIList(searchParams);
+      results = results.concat(localResults);
 
       this.isRequestInProgress = false;
 
-      if (results && results.length) { this.logging.log('fetched POI list [' + results.length + ']'); }
+      if (results && results.length) {
+        this.logging.log('fetched POI list [' + results.length + ']');
+      }
 
       return results;
-
     } catch (rejected) {
       this.isRequestInProgress = false;
+      return [];
+    }
+  }
+  /**
+   * Fetch additional POI list from the localhost API
+   * @param searchParams
+   */
+  private async fetchLocalPOIList(searchParams: POISearchParams): Promise<Array<ExtendedPOIDetails>> {
+    const apiUrl = 'http://localhost:5000/api/pois'; // Update URL as needed
+    try {
+      const results = await this.http.get<any[]>(apiUrl).toPromise();
+      return results;
+    } catch (error) {
+      this.logging.log('Error fetching local POI list: ' + JSON.stringify(error), LogLevel.ERROR);
       return [];
     }
   }

@@ -19,6 +19,7 @@ import { Analytics } from './Analytics';
 import { environment } from '../../environments/environment';
 import { Events } from './Events';
 import { POIDetails } from '../model/CoreDataModel';
+import { v4 as uuidv4 } from 'uuid'; // Import UUID library
 
 @Injectable({
   providedIn: 'root',
@@ -231,6 +232,9 @@ export class AppManager {
     }
   }
   public addPOIToLiveInstance(poi: POIDetails): Promise<any> {
+    // Generate UUID for the POI
+    poi.UUID = uuidv4();
+
     // Make an API call to the Python server to store the POI in the database
     return new Promise<any>((resolve, reject) => {
       this.http.post(this.apiUrl, poi).subscribe(
@@ -243,8 +247,9 @@ export class AppManager {
           reject(error);
         }
       );
-    }
-  )}
+    });
+  }
+
 
   public initAuthFromStorage() {
     // check if valid user auth already in local storage
