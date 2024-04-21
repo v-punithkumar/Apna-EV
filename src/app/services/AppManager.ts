@@ -18,7 +18,7 @@ import { Platforms } from '@ionic/core';
 import { Analytics } from './Analytics';
 import { environment } from '../../environments/environment';
 import { Events } from './Events';
-import { POIDetails } from '../model/CoreDataModel';
+import { ExtendedPOIDetails, POIDetails } from '../model/CoreDataModel';
 import { v4 as uuidv4 } from 'uuid'; // Import UUID library
 
 @Injectable({

@@ -14,6 +14,16 @@ export interface POIDetails {
     DataProviderID: number;
 
     /**
+     * UUID
+     */
+    UUID?: string;
+
+    /**
+     * Date quality level
+     */
+    DataQualityLevel?: number;
+
+    /**
      * Data Provider's own reference for this site
      * */
     DataProvidersReference: string | null;
@@ -77,6 +87,11 @@ export interface POIDetails {
      * Optional list of metadata values such as data attribution info
      */
     MetadataValues: MetadataValue[] | null;
+
+    /**
+     * Date created
+     */
+    DateCreated: Date;
 }
 
 /**
@@ -93,8 +108,8 @@ export interface ExtendedPOIDetails extends POIDetails {
     DateLastConfirmed: Date | null;
     StatusType: StatusType | null;
     DateLastStatusUpdate: Date | null;
-    DataQualityLevel: number | null;
-    DateCreated: Date;
+    // DataQualityLevel: number | null;
+    // DateCreated: Date;
     SubmissionStatus: SubmissionStatusType | null;
     UserComments: UserComment[] | null;
     MediaItems: MediaItem[] | null;

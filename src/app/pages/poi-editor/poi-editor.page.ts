@@ -96,6 +96,8 @@ export class PoiEditorPage implements OnInit {
     this.item = {
       ID: -1,
       DataProviderID: 1,
+      DateCreated: new Date(Date.now()),
+      DataQualityLevel: 2,
       DataProvidersReference: null,
       OperatorsReference: null,
       OperatorID: 1,
