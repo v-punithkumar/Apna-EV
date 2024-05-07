@@ -1,8 +1,20 @@
+import random
+import string
+
 from json import dumps
 
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
+
+def generate_random_string(length):
+    # Define the characters to choose from
+    characters = string.ascii_lowercase + string.digits + '-'
+    
+    # Generate the random string
+    random_string = ''.join(random.choice(characters) for _ in range(length))
+    
+    return random_string
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/pois'
@@ -19,6 +31,7 @@ def store_poi():
     poi_data = request.get_json()
 
     new_poi = {
+        'ID': generate_random_string(24),
         'UUID': poi_data['UUID'],
         'DataProviderID': poi_data['DataProviderID'],
         'OperatorID': poi_data['OperatorID'],
